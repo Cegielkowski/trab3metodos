@@ -96,7 +96,7 @@ float AjusteExponencial(int n, float tabela[NMAX][NMAX+1])
 {
 	int i;
 	float SomatorioX=0, SomatorioX2=0, SomatorioY=0, SomatorioXY=0, a, b, A, B, YAjustado[NMAX+1];
-	/* Cálculo dos somatórios */
+	/* CÃ¡lculo dos somatÃ³rios */
  for(i=1;i<=n;i++)
  {
   SomatorioX = SomatorioX + tabela[0][i];
@@ -105,7 +105,7 @@ float AjusteExponencial(int n, float tabela[NMAX][NMAX+1])
   SomatorioXY = SomatorioXY + tabela[0][i]*log(tabela[1][i]);
  }
  
- /* Cálculo de A e B */
+ /* CÃ¡lculo de A e B */
  B = (n*SomatorioXY-SomatorioX*SomatorioY)/(n*SomatorioX2-SomatorioX*SomatorioX);
  A = (SomatorioY - B*SomatorioX)/n;
  
@@ -114,7 +114,7 @@ float AjusteExponencial(int n, float tabela[NMAX][NMAX+1])
  b = exp(B);
  
  printf("\nOs valores sao: a=%0.2f e b = %0.2f",a,b);
- /* Cálculo dos valores de Y ajustados */
+ /* CÃ¡lculo dos valores de Y ajustados */
  for (i=1;i<=n;i++)
  {
  	 YAjustado[i] = a * pow(b, tabela[0][i]);
@@ -225,6 +225,82 @@ int main(void){
 
         case 4:
             printf("\nAJUSTE RETA ESCOLHIDO\n\n");
+	    int i = 0;
+		float pontos, x, somax, y, somay, xy, xquad;
+
+		somax = 0;
+
+		somay = 0;
+
+		xy = 0;
+
+		xquad = 0;
+
+		float yquad = 0;
+
+		float a = 0;
+
+		float b = 0;
+
+		float r = 0;
+
+		printf ("######### REGRESSAO LINEAR ##########\n\n");
+
+		printf ("Diga quantos pontos voce tem: ");
+
+		scanf ("%f", &pontos);
+
+		fflush (stdin);
+
+		for (i = 0; i < pontos; i++)
+		    {
+
+		printf ("\nDigite o valor do %d ponto\n", (i + 1));
+
+		printf ("Digite o valor de " "X" ": ");
+
+		scanf ("%f", &x);
+
+		fflush (stdin);
+
+		printf ("Digite o valor de " "Y" ": ");
+
+		scanf ("%f", &y);
+
+		fflush (stdin);
+
+		somax += x;
+
+		somay += y;
+
+		xy += (x * y);
+
+		xquad += (x * x);
+
+		yquad += (y * y);
+
+		printf ("SomaX= %.2f, SomaY= %.2f, XY= %.2f, Xquad= %.2f", somax,
+			       somay, xy, xquad);
+
+		}
+
+		    //equacao da reta
+		    a =
+		    (((pontos * xy) - (somax * somay)) / ((pontos * xquad) -
+							  (somax * somax)));
+
+		b = (((somay / pontos) - (a * (somax / pontos))));
+
+		printf ("\n\nA equacao da reta e %.1fx + %f \n\n", a, b);
+
+		    //coeficiente de pearson
+		    r =
+		    (((pontos * xy) -
+		      (somax * somay)) / (sqrt (((pontos * xquad) - (pow (somax, 2))) *
+						((pontos * yquad) - (pow (somay, 2))))));
+
+		printf ("O coeficiente de Pearson e %.5f\n\n", r);		
+			
             break;
 
         case 5:
